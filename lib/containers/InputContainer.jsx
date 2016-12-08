@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Input from '../components/Input';
 
+import { addItem } from '../actions/index';
+
 const mapStateToProps = (state) => ({
   state,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-	//dispatch...
+	   addItem: (name, aisle, quantity, note) => {
+       dispatch(addItem(name, aisle, quantity, note));
+     },
   };
 };
 
