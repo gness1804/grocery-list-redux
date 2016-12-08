@@ -6,10 +6,10 @@ const mapStateToProps = (state) => ({
   state,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-	//dispatch...
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+// 	//dispatch...
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Output)
+export default connect(mapStateToProps)(Output)
