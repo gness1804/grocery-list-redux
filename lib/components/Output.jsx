@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ItemCard from './ItemCard';
+import ItemCardContainer from '../containers/ItemCardContainer';
 
 class Output extends Component {
 
@@ -10,7 +10,7 @@ class Output extends Component {
     const items = this.props.state;
     if (items) {
       itemList = items.map(item =>
-        <ItemCard
+        <ItemCardContainer
          {...item}
          key={item.id}
        />
