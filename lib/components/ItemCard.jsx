@@ -24,7 +24,7 @@ class ItemCard extends Component {
           <input defaultValue={quantity} ref={(c) => { this.quantity = c; }} />
           <input defaultValue={note} ref={(c) => { this.note = c; }} />
           <button onClick={() => { editItem(this.name.value, this.aisle.value, this.quantity.value, this.note.value, id); }}>Save Edits</button>
-          <button onClick={() => { this.toggleEditable() }}>Cancel</button>
+          <button onClick={() => { this.toggleEditable() }}>Exit Editing</button>
           <button className="delete-button" onClick={() => { deleteItem(id) }}>Delete Item</button>
         </div>
       );
