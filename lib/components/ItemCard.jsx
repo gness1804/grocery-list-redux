@@ -19,10 +19,10 @@ class ItemCard extends Component {
     if (this.state.editable) {
       display = (
         <div>
-          <input defaultValue={name} ref={(c) => { this.name = c; }} />
-          <input defaultValue={aisle} ref={(c) => { this.aisle = c; }} />
-          <input defaultValue={quantity} ref={(c) => { this.quantity = c; }} />
-          <input defaultValue={note} ref={(c) => { this.note = c; }} />
+          <input defaultValue={name} ref={(c) => { this.name = c; }} placeholder="Name" />
+          <input defaultValue={aisle} ref={(c) => { this.aisle = c; }} placeholder="Aisle" />
+          <input defaultValue={quantity} ref={(c) => { this.quantity = c; }} placeholder="Quantity" />
+          <input defaultValue={note} ref={(c) => { this.note = c; }} placeholder="Note" />
           <button onClick={() => { editItem(this.name.value, this.aisle.value, this.quantity.value, this.note.value, id); }}>Save Edits</button>
           <button onClick={() => { this.toggleEditable() }}>Exit Editing</button>
           <button className="delete-button" onClick={() => { deleteItem(id) }}>Delete Item</button>
