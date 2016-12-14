@@ -13,7 +13,7 @@ class ItemCard extends Component {
   }
 
   render() {
-    const { name, aisle, quantity, note, id, deleteItem, editItem } = this.props;
+    const { name, aisle, quantity, note, id, inCart, deleteItem, editItem } = this.props;
     let display;
 
     if (this.state.editable) {
@@ -36,6 +36,7 @@ class ItemCard extends Component {
         <h5 className="quantity">Quantity: {quantity}</h5>
         <button className="edit-button" onClick={() => { this.toggleEditable() }}>Edit Item</button>
         <button className="delete-button" onClick={() => { deleteItem(id) }}>Delete Item</button>
+        {inCart ? <button>Remove from Cart</button> : <button>Put in Cart</button>}
       </div>)
     }
 

@@ -4,8 +4,8 @@ const items = (state = [], action) => {
   const arr = [];
   switch(action.type) {
     case 'ADD_ITEM':
-      localStorage.setItem('items', JSON.stringify(state.concat({ name: action.name, aisle: action.aisle, quantity: action.quantity, note: action.note, id: Date.now() })));
-      return state.concat({ name: action.name, aisle: action.aisle, quantity: action.quantity, note: action.note, id: Date.now() });
+      localStorage.setItem('items', JSON.stringify(state.concat({ name: action.name, aisle: action.aisle, quantity: action.quantity, note: action.note, inCart: false, id: Date.now() })));
+      return state.concat({ name: action.name, aisle: action.aisle, quantity: action.quantity, note: action.note, inCart: false, id: Date.now() });
     case 'DELETE_ITEM':
       const warning = confirm('Are you sure you want to delete this item?');
       if (warning) {
