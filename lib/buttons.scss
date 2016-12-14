@@ -1,0 +1,28 @@
+@import "variables.scss";
+
+@mixin green-buttons {
+  background-color: rgb(160, 236, 175);
+}
+
+@mixin green-buttons-hover {
+  background-color: rgb(42, 203, 254);
+  cursor: pointer;
+}
+
+@mixin blue-buttons {
+  background-color: rgb(207, 244, 245);
+}
+
+@mixin blue-buttons-hover  {
+  background-color: rgb(142, 223, 223);
+  cursor: pointer;
+}
+
+@mixin red-buttons {
+  background-color: rgb(219, 101, 93);
+}
+
+@mixin red-buttons-hover {
+  background-color: rgb(238, 73, 20);
+  cursor: pointer;
+}

@@ -1,5 +1,110 @@
 @import "variables.scss";
-@import "mixins.scss"; 
+@import "mixins.scss";
 @import "debug.scss";
+@import "typography.scss";
+@import "input-fields.scss";
 @import "mobile.scss";
+@import "buttons.scss";
 
+html {
+  background: $main-background;
+  font-family: $main-font;
+  height: 2000px;
+  text-align: center;
+}
+
+h1 {
+  @include headline;
+}
+
+#input-items-container {
+  text-align: center;
+}
+
+input {
+  @include input-standard;
+
+  &:hover{
+    @include input-standard-hover;
+  }
+
+}
+
+.logged-in-as {
+   font-size: 20px;
+   margin: 20px auto;
+}
+
+.login-name {
+   font-style: italic;
+}
+
+#submit-button, .sign-in-button {
+  @include green-buttons;
+
+  &:hover {
+    @include green-buttons-hover;
+  }
+
+}
+
+#sort-items-button, #top-of-page-button, #sort-alpha-button {
+  @include blue-buttons;
+
+  &:hover{
+    @include blue-buttons-hover;
+  }
+
+}
+
+.edit-button, .save-edits-button {
+  @include blue-buttons;
+
+  &:hover{
+   @include blue-buttons-hover;
+  }
+}
+
+#item-status-message {
+  font-size: 24px;
+  font-style: italic;
+  margin: 30px auto;
+  text-align: center;
+}
+
+#items-master-container {
+  border: 1px solid black;
+  margin: 50px auto;
+  min-height: 400px;
+  padding: 0 10px;
+
+  li {
+    list-style-type: none;
+  }
+
+}
+
+.each-idea-container {
+  background-color: white;
+  border: 1px solid black;
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+}
+
+.each-idea-container h2 {
+  font-weight: bold;
+}
+
+.each-idea-container h4 {
+  font-style: italic;
+}
+
+.delete-button, #delete-all-items-button, .sign-out-button {
+  @include red-buttons;
+
+  &:hover {
+    @include red-buttons-hover;
+  }
+
+}
