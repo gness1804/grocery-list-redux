@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Category from './Category';
+import Datalist from './Datalist';
 
 import aisles from './Aisles';
 
@@ -26,6 +27,7 @@ class Input extends Component {
       <div id="input-items-container">
         <input id="item-input" ref={(c) => { this.name = c; }} type="text" placeholder="Item Name" list="groceries" defaultValue="" />
         <Category assignAisle={this.assignAisle} />
+        <Datalist />
         <input id="aisle-input" ref={(c) => { this.aisle = c; }} type="text" placeholder="Aisle" />
         <input id="quantity-input" ref={(c) => { this.quantity = c; }} type="text" placeholder="Quantity" />
         <input id="note-input" ref={(c) => { this.note = c; }} type="text" placeholder="Note" />
