@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Category from './Category';
+
+import aisles from './Aisles';
 
 class Input extends Component {
 
@@ -7,13 +10,22 @@ class Input extends Component {
     this.props.retrieveStoredItems(items);
   }
 
+  assignAisle = (category) => {
+    if (category === 'Produce' || category === 'Meat' || category === 'Deli/Prepared Foods' || category === 'Checkout' || category === 'Bakery' || category === 'Pest Control(Front of Store)' || category === 'Dairy and Orange Juice'){
+      document.getElementById('aisle-input').value = category;
+    } else {
+      document.getElementById('aisle-input').value = aisles[category];
+    }
+  }
+
   render() {
 
     const { addItem, deleteAllItems, sortAisle, sortAlpha } = this.props;
 
     return (
       <div id="input-items-container">
-        <input id="item-input" ref={(c) => { this.name = c; }} type="text" placeholder="Item Name" list="groceries" />
+        <input id="item-input" ref={(c) => { this.name = c; }} type="text" placeholder="Item Name" list="groceries" defaultValue="" />
+        <Category assignAisle={this.assignAisle} />
         <input id="aisle-input" ref={(c) => { this.aisle = c; }} type="text" placeholder="Aisle" />
         <input id="quantity-input" ref={(c) => { this.quantity = c; }} type="text" placeholder="Quantity" />
         <input id="note-input" ref={(c) => { this.note = c; }} type="text" placeholder="Note" />
