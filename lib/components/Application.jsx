@@ -5,6 +5,9 @@ import OutputContainer from '../containers/OutputContainer';
 class Application extends Component {
 
   render() {
+
+    // JSON.parse(localStorage.getItem('items'));
+
     return (
       <div>
         <h1 id="top-of-page">Flash Shopper</h1>

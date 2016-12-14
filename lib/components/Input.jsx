@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 
 class Input extends Component {
 
+  componentDidMount() {
+    const newArr = [];
+    const items = JSON.parse(localStorage.getItem('items'));
+    // console.log(items[0]);
+    this.props.retrieveStoredItems(items);
+    // items.forEach((item) => {
+    //   this.props.addItem(item.name.name);
+    //   // console.log(item.name.name);
+    //  });
+  }
+
   render() {
 
     const { addItem, deleteAllItems, sortAisle, sortAlpha } = this.props;

@@ -5,7 +5,7 @@ const items = (state = [], action) => {
   switch(action.type) {
     case 'ADD_ITEM':
       localStorage.setItem('items', JSON.stringify(state.concat({ name: action.name, aisle: action.aisle, quantity: action.quantity, note: action.note, id: Date.now() })));
-      return state.concat({ name: action.name, aisle: action.aisle, quantity: action.quantity, note:action.note, id: Date.now() });
+      return state.concat({ name: action.name, aisle: action.aisle, quantity: action.quantity, note: action.note, id: Date.now() });
     case 'DELETE_ITEM':
     localStorage.setItem('items', JSON.stringify(state.filter((i) => { return i.id !== action.id })));
       return state.filter((i) => { return i.id !== action.id });
@@ -41,6 +41,8 @@ const items = (state = [], action) => {
           name: action.name, aisle: action.aisle, quantity: action.quantity, note: action.note, id: action.id,
         });
       });
+    case 'RETRIEVE_STORED_ITEMS':
+      return action.items;
     default:
       return state;
   }
