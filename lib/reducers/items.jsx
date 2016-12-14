@@ -10,8 +10,11 @@ const items = (state = [], action) => {
     localStorage.setItem('items', JSON.stringify(state.filter((i) => { return i.id !== action.id })));
       return state.filter((i) => { return i.id !== action.id });
     case 'DELETE_ALL_ITEMS':
-      localStorage.setItem('items', JSON.stringify([]));
-      return [];
+      const warning = confirm('This will delete ALL items! Are you sure?');
+      if (warning) {
+        localStorage.setItem('items', JSON.stringify([]));
+        return [];  
+      }
     case 'SORT_AISLE':
       state.forEach((item) => {
         arr.push(item);
