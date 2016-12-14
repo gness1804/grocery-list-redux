@@ -19,6 +19,15 @@ class Input extends Component {
     }
   }
 
+  submitItem() {
+    this.props.addItem(this.name.value, this.aisle.value, this.quantity.value, this.note.value);
+    document.getElementById('item-input').value = '';
+    document.getElementById('aisle-input').value = '';
+    document.getElementById('quantity-input').value = '';
+    document.getElementById('note-input').value = '';
+    document.getElementById('category').value = 'Please choose a category.';
+  }
+
   render() {
 
     const { addItem, deleteAllItems, sortAisle, sortAlpha } = this.props;
@@ -31,7 +40,7 @@ class Input extends Component {
         <input id="aisle-input" ref={(c) => { this.aisle = c; }} type="text" placeholder="Aisle" />
         <input id="quantity-input" ref={(c) => { this.quantity = c; }} type="text" placeholder="Quantity" />
         <input id="note-input" ref={(c) => { this.note = c; }} type="text" placeholder="Note" />
-        <button onClick={() => { addItem(this.name.value, this.aisle.value, this.quantity.value, this.note.value); }}>Submit</button>
+        <button onClick={() => { this.submitItem() }}>Submit</button>
         <button onClick={() => { sortAisle() }} id="sort-items-button" type="button">Sort by Aisle</button>
         <button onClick={() => { sortAlpha() }} id="sort-alpha-button" type="button">Sort Alpha</button>
         <button id="delete-all-items-button" type="button" onClick={() => { deleteAllItems() }}>Delete ALL Items!</button>
