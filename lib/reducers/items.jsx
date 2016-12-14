@@ -2,8 +2,9 @@ import { sortBy } from 'lodash';
 
 const items = (state = [], action) => {
   const arr = [];
-  switch(action.type){
+  switch(action.type) {
     case 'ADD_ITEM':
+      localStorage.setItem('items', JSON.stringify(state.concat({ name: action.name, aisle: action.aisle, quantity: action.quantity, note: action.note, id: Date.now() })));
       return state.concat({ name: action.name, aisle: action.aisle, quantity: action.quantity, note:action.note, id: Date.now() });
     case 'DELETE_ITEM':
       return state.filter((i) => { return i.id !== action.id });
