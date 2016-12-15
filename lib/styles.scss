@@ -39,7 +39,7 @@ input {
    font-style: italic;
 }
 
-#submit-button, .sign-in-button {
+#submit-button, .sign-in-button, .save-edits-button {
   @include green-buttons;
 
   &:hover {
@@ -57,7 +57,7 @@ input {
 
 }
 
-.edit-button, .save-edits-button {
+.edit-button, #in-cart-button, .exit-edit-button {
   @include blue-buttons;
 
   &:hover{

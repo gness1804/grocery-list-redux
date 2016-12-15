@@ -40,7 +40,7 @@ class Input extends Component {
         <input id="aisle-input" ref={(c) => { this.aisle = c; }} type="text" placeholder="Aisle" />
         <input id="quantity-input" ref={(c) => { this.quantity = c; }} type="text" placeholder="Quantity" />
         <input id="note-input" ref={(c) => { this.note = c; }} type="text" placeholder="Note" />
-        <button onClick={() => { this.submitItem() }}>Submit</button>
+        <button onClick={() => { this.submitItem() }} id="submit-button">Submit</button>
         <button onClick={() => { sortAisle() }} id="sort-items-button" type="button">Sort by Aisle</button>
         <button onClick={() => { sortAlpha() }} id="sort-alpha-button" type="button">Sort Alpha</button>
         <button id="delete-all-items-button" type="button" onClick={() => { deleteAllItems() }}>Delete ALL Items!</button>

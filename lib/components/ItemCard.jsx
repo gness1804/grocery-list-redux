@@ -27,8 +27,8 @@ class ItemCard extends Component {
           <input defaultValue={aisle} ref={(c) => { this.aisle = c; }} placeholder="Aisle" />
           <input defaultValue={quantity} ref={(c) => { this.quantity = c; }} placeholder="Quantity" />
           <input defaultValue={note} ref={(c) => { this.note = c; }} placeholder="Note" />
-          <button onClick={() => { editItem(this.name.value, this.aisle.value, this.quantity.value, this.note.value, id); }}>Save Edits</button>
-          <button onClick={() => { this.toggleEditable() }}>Exit Editing</button>
+          <button className="save-edits-button" onClick={() => { editItem(this.name.value, this.aisle.value, this.quantity.value, this.note.value, id); }}>Save Edits</button>
+          <button className="exit-edit-button" onClick={() => { this.toggleEditable() }}>Exit Editing</button>
           <button className="delete-button" onClick={() => { deleteItem(id) }}>Delete Item</button>
         </div>
       );
@@ -41,7 +41,7 @@ class ItemCard extends Component {
         {this.props.inCart}
         <button className="edit-button" onClick={() => { this.toggleEditable() }}>Edit Item</button>
         <button className="delete-button" onClick={() => { deleteItem(id) }}>Delete Item</button>
-        { inCart? <button onClick={ () => { this.toggle(id) }}>Remove from Cart</button> : <button onClick={ () => { this.toggle(id) }}>Put in Cart</button>}
+        { inCart ? <button id="in-cart-button" onClick={ () => { this.toggle(id) }}>Remove from Cart</button> : <button id="in-cart-button" onClick={ () => { this.toggle(id) }}>Put in Cart</button>}
       </div>)
     }
 
