@@ -18,7 +18,8 @@ class Pantry extends Component {
     }
 
     return (
-      <div>
+      <div className="pantry-container">
+        <h2 className="pantry-headline">Pantry</h2>
         {pantryDisplay}
       </div>
     );

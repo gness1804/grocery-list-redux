@@ -114,3 +114,28 @@ input {
   color: rgb(140, 140, 140);
   text-decoration: line-through;
 }
+
+.pantry-container {
+  background-color: white;
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 80vw;
+
+  .pantry-headline {
+    font-size: 36px;
+    margin: 50px auto;
+  }
+
+  .pantry-item-name {
+    color: rgb(64, 37, 226);
+    
+    &:hover {
+      color: red;
+      font-style: italic;
+      cursor: pointer;
+    }
+
+  }
+
+
+}

@@ -13,7 +13,7 @@ class PantryItemCard extends Component {
 
     return (
       <div>
-        <h2 onClick={ () => { this.add(name, aisle, quantity, note) } }>{name}</h2>
+        <h2 className="pantry-item-name" onClick={ () => { this.add(name, aisle, quantity, note) } }>{name}</h2>
       </div>
     );
   }
