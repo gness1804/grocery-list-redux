@@ -8194,13 +8194,13 @@
 	
 	var _Application2 = _interopRequireDefault(_Application);
 	
-	var _items = __webpack_require__(516);
+	var _items = __webpack_require__(519);
 	
 	var _items2 = _interopRequireDefault(_items);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(518);
+	__webpack_require__(521);
 	
 	var enhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 	
@@ -31346,23 +31346,22 @@
 	  _inherits(Input, _Component);
 	
 	  function Input() {
-	    var _ref;
-	
-	    var _temp, _this, _ret;
-	
 	    _classCallCheck(this, Input);
 	
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
+	    var _this = _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).call(this));
 	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Input.__proto__ || Object.getPrototypeOf(Input)).call.apply(_ref, [this].concat(args))), _this), _this.assignAisle = function (category) {
+	    _this.assignAisle = function (category) {
 	      if (category === 'Produce' || category === 'Meat' || category === 'Deli/Prepared Foods' || category === 'Checkout' || category === 'Bakery' || category === 'Pest Control(Front of Store)' || category === 'Dairy and Orange Juice') {
 	        document.getElementById('aisle-input').value = category;
 	      } else {
 	        document.getElementById('aisle-input').value = _Aisles2.default[category];
 	      }
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	    };
+	
+	    _this.state = {
+	      submitDisabled: true
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(Input, [{
@@ -31370,6 +31369,22 @@
 	    value: function componentDidMount() {
 	      var items = JSON.parse(localStorage.getItem('items'));
 	      this.props.retrieveStoredItems(items);
+	    }
+	  }, {
+	    key: 'checkInputState',
+	    value: function checkInputState(e) {
+	      if (e) {
+	        if (e.target.value !== '') {
+	          this.setState({ submitDisabled: false });
+	        } else {
+	          this.setState({ submitDisabled: true });
+	        }
+	      }
+	      if (document.getElementById('item-input').value !== '') {
+	        this.setState({ submitDisabled: false });
+	      } else {
+	        this.setState({ submitDisabled: true });
+	      }
 	    }
 	  }, {
 	    key: 'submitItem',
@@ -31380,6 +31395,7 @@
 	      document.getElementById('quantity-input').value = '';
 	      document.getElementById('note-input').value = '';
 	      document.getElementById('category').value = 'Please choose a category.';
+	      this.setState({ submitDisabled: true });
 	    }
 	  }, {
 	    key: 'render',
@@ -31390,6 +31406,7 @@
 	          deleteAllItems = _props.deleteAllItems,
 	          sortAisle = _props.sortAisle,
 	          sortAlpha = _props.sortAlpha;
+	      var submitDisabled = this.state.submitDisabled;
 	
 	
 	      return _react2.default.createElement(
@@ -31397,7 +31414,11 @@
 	        { id: 'input-items-container' },
 	        _react2.default.createElement('input', { id: 'item-input', ref: function ref(c) {
 	            _this2.name = c;
-	          }, type: 'text', placeholder: 'Item Name', list: 'groceries', defaultValue: '' }),
+	          }, type: 'text', placeholder: 'Item Name', list: 'groceries', defaultValue: '', onChange: function onChange(e) {
+	            _this2.checkInputState(e);
+	          }, onBlur: function onBlur() {
+	            _this2.checkInputState();
+	          } }),
 	        _react2.default.createElement(_Category2.default, { assignAisle: this.assignAisle }),
 	        _react2.default.createElement(_Datalist2.default, null),
 	        _react2.default.createElement('input', { id: 'aisle-input', ref: function ref(c) {
@@ -31413,7 +31434,7 @@
 	          'button',
 	          { onClick: function onClick() {
 	              _this2.submitItem();
-	            } },
+	            }, id: 'submit-button', disabled: submitDisabled },
 	          'Submit'
 	        ),
 	        _react2.default.createElement(
@@ -31880,6 +31901,10 @@
 	
 	var _ItemCardContainer2 = _interopRequireDefault(_ItemCardContainer);
 	
+	var _Pantry = __webpack_require__(516);
+	
+	var _Pantry2 = _interopRequireDefault(_Pantry);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31933,7 +31958,8 @@
 	          'section',
 	          { id: 'items-master-container' },
 	          itemList
-	        )
+	        ),
+	        _react2.default.createElement(_Pantry2.default, null)
 	      );
 	    }
 	  }]);
@@ -31993,7 +32019,7 @@
 /* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -32028,17 +32054,17 @@
 	  }
 	
 	  _createClass(ItemCard, [{
-	    key: "toggle",
+	    key: 'toggle',
 	    value: function toggle(id) {
 	      this.props.toggleInCart(id);
 	    }
 	  }, {
-	    key: "toggleEditable",
+	    key: 'toggleEditable',
 	    value: function toggleEditable() {
 	      this.setState({ editable: !this.state.editable });
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 	
@@ -32053,101 +32079,114 @@
 	          editItem = _props.editItem;
 	
 	      var display = void 0;
+	      var ifInCart = void 0;
+	
+	      if (inCart) {
+	        ifInCart = 'is-in-cart';
+	      } else {
+	        ifInCart = '';
+	      }
 	
 	      if (this.state.editable) {
 	        display = _react2.default.createElement(
-	          "div",
+	          'div',
 	          null,
-	          _react2.default.createElement("input", { defaultValue: name, ref: function ref(c) {
+	          _react2.default.createElement('input', { defaultValue: name, ref: function ref(c) {
 	              _this2.name = c;
-	            }, placeholder: "Name" }),
-	          _react2.default.createElement("input", { defaultValue: aisle, ref: function ref(c) {
+	            }, placeholder: 'Name' }),
+	          _react2.default.createElement('input', { defaultValue: aisle, ref: function ref(c) {
 	              _this2.aisle = c;
-	            }, placeholder: "Aisle" }),
-	          _react2.default.createElement("input", { defaultValue: quantity, ref: function ref(c) {
+	            }, placeholder: 'Aisle' }),
+	          _react2.default.createElement('input', { defaultValue: quantity, ref: function ref(c) {
 	              _this2.quantity = c;
-	            }, placeholder: "Quantity" }),
-	          _react2.default.createElement("input", { defaultValue: note, ref: function ref(c) {
+	            }, placeholder: 'Quantity' }),
+	          _react2.default.createElement('input', { defaultValue: note, ref: function ref(c) {
 	              _this2.note = c;
-	            }, placeholder: "Note" }),
+	            }, placeholder: 'Note' }),
 	          _react2.default.createElement(
-	            "button",
-	            { onClick: function onClick() {
+	            'button',
+	            { className: 'save-edits-button', onClick: function onClick() {
 	                editItem(_this2.name.value, _this2.aisle.value, _this2.quantity.value, _this2.note.value, id);
 	              } },
-	            "Save Edits"
+	            'Save Edits'
 	          ),
 	          _react2.default.createElement(
-	            "button",
-	            { onClick: function onClick() {
+	            'button',
+	            { className: 'exit-edit-button', onClick: function onClick() {
 	                _this2.toggleEditable();
 	              } },
-	            "Exit Editing"
+	            'Exit Editing'
 	          ),
 	          _react2.default.createElement(
-	            "button",
-	            { className: "delete-button", onClick: function onClick() {
+	            'button',
+	            { className: 'delete-button', onClick: function onClick() {
 	                deleteItem(id);
 	              } },
-	            "Delete Item"
+	            'Delete Item'
 	          )
 	        );
 	      } else {
 	        display = _react2.default.createElement(
-	          "div",
-	          null,
+	          'div',
+	          { className: ifInCart },
 	          _react2.default.createElement(
-	            "h2",
-	            { className: "editable-item" },
-	            "Item: ",
+	            'h2',
+	            { className: 'editable-item' },
+	            'Item: ',
 	            name
 	          ),
 	          _react2.default.createElement(
-	            "h3",
-	            { className: "editable-aisle" },
-	            "Aisle: ",
+	            'h3',
+	            { className: 'editable-aisle' },
+	            'Aisle: ',
 	            aisle
 	          ),
 	          _react2.default.createElement(
-	            "h4",
-	            { className: "note" },
-	            "Your Note: ",
+	            'h4',
+	            { className: 'note' },
+	            'Your Note: ',
 	            note
 	          ),
 	          _react2.default.createElement(
-	            "h5",
-	            { className: "quantity" },
-	            "Quantity: ",
+	            'h5',
+	            { className: 'quantity' },
+	            'Quantity: ',
 	            quantity
 	          ),
 	          this.props.inCart,
 	          _react2.default.createElement(
-	            "button",
-	            { className: "edit-button", onClick: function onClick() {
+	            'button',
+	            { className: 'edit-button', onClick: function onClick() {
 	                _this2.toggleEditable();
 	              } },
-	            "Edit Item"
+	            'Edit Item'
 	          ),
 	          _react2.default.createElement(
-	            "button",
-	            { className: "delete-button", onClick: function onClick() {
+	            'button',
+	            { className: 'delete-button', onClick: function onClick() {
 	                deleteItem(id);
 	              } },
-	            "Delete Item"
+	            'Delete Item'
 	          ),
-	          _react2.default.createElement(
-	            "button",
-	            { onClick: function onClick() {
+	          inCart ? _react2.default.createElement(
+	            'button',
+	            { id: 'in-cart-button', onClick: function onClick() {
 	                _this2.toggle(id);
 	              } },
-	            "Put in Cart"
+	            'Remove from Cart'
+	          ) : _react2.default.createElement(
+	            'button',
+	            { id: 'in-cart-button', onClick: function onClick() {
+	                _this2.toggle(id);
+	              } },
+	            'Put in Cart'
 	          )
 	        );
 	      }
 	
 	      return _react2.default.createElement(
-	        "div",
-	        { id: id, className: "each-idea-container" },
+	        'div',
+	        { id: id, className: 'each-idea-container' },
 	        display
 	      );
 	    }
@@ -32168,7 +32207,169 @@
 	  value: true
 	});
 	
-	var _lodash = __webpack_require__(517);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _pantryItems = __webpack_require__(517);
+	
+	var _pantryItems2 = _interopRequireDefault(_pantryItems);
+	
+	var _PantryItemCard = __webpack_require__(518);
+	
+	var _PantryItemCard2 = _interopRequireDefault(_PantryItemCard);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Pantry = function (_Component) {
+	  _inherits(Pantry, _Component);
+	
+	  function Pantry() {
+	    _classCallCheck(this, Pantry);
+	
+	    return _possibleConstructorReturn(this, (Pantry.__proto__ || Object.getPrototypeOf(Pantry)).apply(this, arguments));
+	  }
+	
+	  _createClass(Pantry, [{
+	    key: 'render',
+	    value: function render() {
+	
+	      var pantryStuff = void 0;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        pantryStuff
+	      );
+	    }
+	  }]);
+	
+	  return Pantry;
+	}(_react.Component);
+	
+	exports.default = Pantry;
+
+/***/ },
+/* 517 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var pantry = [{
+	  name: 'olives',
+	  aisle: 2,
+	  quantity: '',
+	  note: ''
+	}, {
+	  name: 'olive oil',
+	  aisle: 5,
+	  quantity: '',
+	  note: ''
+	}, {
+	  name: 'pasta',
+	  aisle: 6,
+	  quantity: '',
+	  note: ''
+	}, {
+	  name: 'pasta sauce',
+	  aisle: 6,
+	  quantity: '',
+	  note: ''
+	}, {
+	  name: '',
+	  aisle: '',
+	  quantity: '',
+	  note: ''
+	}, {
+	  name: '',
+	  aisle: '',
+	  quantity: '',
+	  note: ''
+	}, {
+	  name: '',
+	  aisle: '',
+	  quantity: '',
+	  note: ''
+	}, {
+	  name: '',
+	  aisle: '',
+	  quantity: '',
+	  note: ''
+	}];
+	
+	exports.default = pantry;
+
+/***/ },
+/* 518 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PantryItemCard = function (_Component) {
+	  _inherits(PantryItemCard, _Component);
+	
+	  function PantryItemCard() {
+	    _classCallCheck(this, PantryItemCard);
+	
+	    return _possibleConstructorReturn(this, (PantryItemCard.__proto__ || Object.getPrototypeOf(PantryItemCard)).apply(this, arguments));
+	  }
+	
+	  _createClass(PantryItemCard, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'I am the pantry item card.'
+	      );
+	    }
+	  }]);
+	
+	  return PantryItemCard;
+	}(_react.Component);
+	
+	exports.default = PantryItemCard;
+
+/***/ },
+/* 519 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _lodash = __webpack_require__(520);
 	
 	var items = function items() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -32231,13 +32432,22 @@
 	    case 'RETRIEVE_STORED_ITEMS':
 	      return action.items;
 	    case 'TOGGLE_IN_CART':
-	      console.log('action id', action.id);
-	      console.log('item id', action.id);
-	    // return state.map(item => {
-	    //   if (item.id !== action.id) {
-	    //     return item;
-	    //   }
-	    // })
+	      localStorage.setItem('items', JSON.stringify(state.map(function (item) {
+	        if (item.id !== action.id) {
+	          return item;
+	        }
+	        return Object.assign({}, item, {
+	          inCart: !item.inCart
+	        });
+	      })));
+	      return state.map(function (item) {
+	        if (item.id !== action.id) {
+	          return item;
+	        }
+	        return Object.assign({}, item, {
+	          inCart: !item.inCart
+	        });
+	      });
 	    default:
 	      return state;
 	  }
@@ -32246,7 +32456,7 @@
 	exports.default = items;
 
 /***/ },
-/* 517 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -49318,16 +49528,16 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(489)(module)))
 
 /***/ },
-/* 518 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(519);
+	var content = __webpack_require__(522);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(521)(content, {});
+	var update = __webpack_require__(524)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -49344,21 +49554,21 @@
 	}
 
 /***/ },
-/* 519 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(520)();
+	exports = module.exports = __webpack_require__(523)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "@media screen and (max-width: 800px) {\n  input, select {\n    display: block;\n    margin: 10px auto;\n    width: 200px; } }\n\nhtml {\n  background: linear-gradient(to bottom, #8694f7, #fcfdfe);\n  font-family: \"Open Sans\", sans-serif;\n  height: 2000px;\n  text-align: center; }\n\nh1 {\n  font-size: 40px;\n  text-align: center; }\n\n#input-items-container {\n  text-align: center; }\n\ninput {\n  border: 1px solid black; }\n  input:hover {\n    border: 1px solid magenta; }\n\n.logged-in-as {\n  font-size: 20px;\n  margin: 20px auto; }\n\n.login-name {\n  font-style: italic; }\n\n#submit-button, .sign-in-button {\n  background-color: #a0ecaf; }\n  #submit-button:hover, .sign-in-button:hover {\n    background-color: #2acbfe;\n    cursor: pointer; }\n\n#sort-items-button, #top-of-page-button, #sort-alpha-button {\n  background-color: #cff4f5; }\n  #sort-items-button:hover, #top-of-page-button:hover, #sort-alpha-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n.edit-button, .save-edits-button {\n  background-color: #cff4f5; }\n  .edit-button:hover, .save-edits-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n#item-status-message {\n  font-size: 24px;\n  font-style: italic;\n  margin: 30px auto;\n  text-align: center; }\n\n#items-master-container {\n  border: 1px solid black;\n  margin: 50px auto;\n  min-height: 400px;\n  padding: 0 10px; }\n  #items-master-container li {\n    list-style-type: none; }\n\n.each-idea-container {\n  background-color: white;\n  border: 1px solid black;\n  margin: 20px auto;\n  padding: 10px;\n  text-align: center; }\n\n.each-idea-container h2 {\n  font-weight: bold; }\n\n.each-idea-container h4 {\n  font-style: italic; }\n\n.delete-button, #delete-all-items-button, .sign-out-button {\n  background-color: #db655d; }\n  .delete-button:hover, #delete-all-items-button:hover, .sign-out-button:hover {\n    background-color: #ee4914;\n    cursor: pointer; }\n", ""]);
+	exports.push([module.id, "@media screen and (max-width: 800px) {\n  input, select {\n    display: block;\n    margin: 10px auto;\n    width: 200px; } }\n\nhtml {\n  background: linear-gradient(to bottom, #8694f7, #fcfdfe);\n  font-family: \"Open Sans\", sans-serif;\n  height: 2000px;\n  text-align: center; }\n\nh1 {\n  font-size: 40px;\n  text-align: center; }\n\n#input-items-container {\n  text-align: center; }\n\ninput {\n  border: 1px solid black; }\n  input:hover {\n    border: 1px solid magenta; }\n\n.logged-in-as {\n  font-size: 20px;\n  margin: 20px auto; }\n\n.login-name {\n  font-style: italic; }\n\n#submit-button, .sign-in-button, .save-edits-button {\n  background-color: #a0ecaf; }\n  #submit-button:hover, .sign-in-button:hover, .save-edits-button:hover {\n    background-color: #2acbfe;\n    cursor: pointer; }\n\n#sort-items-button, #top-of-page-button, #sort-alpha-button {\n  background-color: #cff4f5; }\n  #sort-items-button:hover, #top-of-page-button:hover, #sort-alpha-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n.edit-button, #in-cart-button, .exit-edit-button {\n  background-color: #cff4f5; }\n  .edit-button:hover, #in-cart-button:hover, .exit-edit-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n#item-status-message {\n  font-size: 24px;\n  font-style: italic;\n  margin: 30px auto;\n  text-align: center; }\n\n#items-master-container {\n  border: 1px solid black;\n  margin: 50px auto;\n  min-height: 400px;\n  padding: 0 10px; }\n  #items-master-container li {\n    list-style-type: none; }\n\n.each-idea-container {\n  background-color: white;\n  border: 1px solid black;\n  margin: 20px auto;\n  padding: 10px;\n  text-align: center; }\n\n.each-idea-container h2 {\n  font-weight: bold; }\n\n.each-idea-container h4 {\n  font-style: italic; }\n\n.delete-button, #delete-all-items-button, .sign-out-button {\n  background-color: #db655d; }\n  .delete-button:hover, #delete-all-items-button:hover, .sign-out-button:hover {\n    background-color: #ee4914;\n    cursor: pointer; }\n\n.is-in-cart {\n  background-color: #c2bdb2;\n  color: #8c8c8c;\n  text-decoration: line-through; }\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 520 */
+/* 523 */
 /***/ function(module, exports) {
 
 	/*
@@ -49414,7 +49624,7 @@
 
 
 /***/ },
-/* 521 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

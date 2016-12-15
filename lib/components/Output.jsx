@@ -26,6 +26,7 @@ class Output extends Component {
         <section id="items-master-container">
           {itemList}
         </section>
+        <Pantry />
       </div>
     );
   }
