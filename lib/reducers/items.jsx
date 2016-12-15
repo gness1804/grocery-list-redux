@@ -49,6 +49,23 @@ const items = (state = [], action) => {
       });
     case 'RETRIEVE_STORED_ITEMS':
       return action.items;
+    case 'TOGGLE_IN_CART':
+    localStorage.setItem('items', JSON.stringify(state.map(item => {
+      if (item.id !== action.id) {
+        return item;
+      }
+      return Object.assign({}, item, {
+        inCart: !action.inCart,
+      });
+    })));
+      return state.map(item => {
+        if (item.id !== action.id) {
+          return item;
+        }
+        return Object.assign({}, item, {
+          inCart: !action.inCart,
+        });
+      });
     default:
       return state;
   }
