@@ -19,6 +19,13 @@ class ItemCard extends Component {
   render() {
     const { name, aisle, quantity, note, id, inCart, deleteItem, editItem } = this.props;
     let display;
+    let ifInCart;
+
+    if (inCart) {
+      ifInCart = 'is-in-cart';
+    } else {
+      ifInCart = '';
+    }
 
     if (this.state.editable) {
       display = (
@@ -33,7 +40,7 @@ class ItemCard extends Component {
         </div>
       );
     } else {
-      display = (<div>
+      display = (<div className={ifInCart}>
         <h2 className="editable-item">Item: {name}</h2>
         <h3 className="editable-aisle">Aisle: {aisle}</h3>
         <h4 className="note">Your Note: {note}</h4>

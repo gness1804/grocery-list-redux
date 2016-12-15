@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ItemCardContainer from '../containers/ItemCardContainer';
+import Pantry from './Pantry';
 
 class Output extends Component {
 

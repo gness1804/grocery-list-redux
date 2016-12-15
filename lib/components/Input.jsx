@@ -25,28 +25,20 @@ class Input extends Component {
     }
   }
 
-  // checkInput() {
-  //   if (document.getElementById('item-input').value !== '') {
-  //     this.setState({ submitDisabled: false });
-  //   } else {
-  //     this.setState({ submitDisabled: true });
-  //   }
-  // }
-
   checkInputState(e) {
-  if (e) {
-    if (e.target.value !== '') {
+    if (e) {
+      if (e.target.value !== '') {
+        this.setState({ submitDisabled: false });
+      } else {
+        this.setState({ submitDisabled: true });
+      }
+    }
+    if (document.getElementById('item-input').value !== '') {
       this.setState({ submitDisabled: false });
     } else {
       this.setState({ submitDisabled: true });
     }
   }
-  if (document.getElementById('item-input').value !== '') {
-    this.setState({ submitDisabled: false });
-  } else {
-    this.setState({ submitDisabled: true });
-  }
-}
 
   submitItem() {
     this.props.addItem(this.name.value, this.aisle.value, this.quantity.value, this.note.value);
@@ -61,6 +53,7 @@ class Input extends Component {
   render() {
 
     const { deleteAllItems, sortAisle, sortAlpha } = this.props;
+    const { submitDisabled } = this.state;
 
     return (
       <div id="input-items-container">
@@ -70,7 +63,7 @@ class Input extends Component {
         <input id="aisle-input" ref={(c) => { this.aisle = c; }} type="text" placeholder="Aisle" />
         <input id="quantity-input" ref={(c) => { this.quantity = c; }} type="text" placeholder="Quantity" />
         <input id="note-input" ref={(c) => { this.note = c; }} type="text" placeholder="Note" />
-        <button onClick={() => { this.submitItem() }} id="submit-button" disabled={this.state.submitDisabled}>Submit</button>
+        <button onClick={() => { this.submitItem() }} id="submit-button" disabled={submitDisabled}>Submit</button>
         <button onClick={() => { sortAisle() }} id="sort-items-button" type="button">Sort by Aisle</button>
         <button onClick={() => { sortAlpha() }} id="sort-alpha-button" type="button">Sort Alpha</button>
         <button id="delete-all-items-button" type="button" onClick={() => { deleteAllItems() }}>Delete ALL Items!</button>
