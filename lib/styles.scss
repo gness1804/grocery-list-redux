@@ -39,6 +39,10 @@ input {
    font-style: italic;
 }
 
+.item-card-buttons-container {
+  margin: 20px auto;
+}
+
 #submit-button, .sign-in-button, .save-edits-button {
   @include green-buttons;
 
@@ -63,6 +67,10 @@ input {
   &:hover{
    @include blue-buttons-hover;
   }
+}
+
+#top-of-page-button {
+  margin: 30px auto;
 }
 
 #item-status-message {
@@ -128,7 +136,7 @@ input {
 
   .pantry-item-name {
     color: rgb(64, 37, 226);
-    
+
     &:hover {
       color: red;
       font-style: italic;

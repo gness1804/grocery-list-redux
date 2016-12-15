@@ -46,9 +46,11 @@ class ItemCard extends Component {
         <h4 className="note">Your Note: {note}</h4>
         <h5 className="quantity">Quantity: {quantity}</h5>
         {this.props.inCart}
-        <button className="edit-button" onClick={() => { this.toggleEditable() }}>Edit Item</button>
-        <button className="delete-button" onClick={() => { deleteItem(id) }}>Delete Item</button>
-        { inCart ? <button id="in-cart-button" onClick={ () => { this.toggle(id) }}>Remove from Cart</button> : <button id="in-cart-button" onClick={ () => { this.toggle(id) }}>Put in Cart</button>}
+        <div className="item-card-buttons-container">
+          <button className="edit-button" onClick={() => { this.toggleEditable() }}>Edit Item</button>
+          <button className="delete-button" onClick={() => { deleteItem(id) }}>Delete Item</button>
+          { inCart ? <button id="in-cart-button" onClick={ () => { this.toggle(id) }}>Remove from Cart</button> : <button id="in-cart-button" onClick={ () => { this.toggle(id) }}>Put in Cart</button>}
+        </div>
       </div>)
     }
 
