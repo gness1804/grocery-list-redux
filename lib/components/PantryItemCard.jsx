@@ -9,7 +9,7 @@ class PantryItemCard extends Component {
 
   render() {
 
-    const { name, aisle, quantity, note, addItem } = this.props;
+    const { name, aisle, quantity, note } = this.props;
 
     return (
       <div>
