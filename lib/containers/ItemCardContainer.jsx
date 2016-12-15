@@ -15,8 +15,8 @@ const mapDispatchToProps = (dispatch) => {
     editItem: (name, aisle, quantity, note, id) => {
       dispatch(editItem(name, aisle, quantity, note, id));
     },
-    toggleInCart: (id, inCart) => {
-      dispatch(toggleInCart(id, inCart));
+    toggleInCart: (id) => {
+      dispatch(toggleInCart(id));
     },
   };
 };

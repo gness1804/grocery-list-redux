@@ -30,7 +30,7 @@ class Input extends Component {
 
   render() {
 
-    const { addItem, deleteAllItems, sortAisle, sortAlpha } = this.props;
+    const { deleteAllItems, sortAisle, sortAlpha } = this.props;
 
     return (
       <div id="input-items-container">

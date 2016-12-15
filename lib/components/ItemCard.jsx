@@ -8,6 +8,10 @@ class ItemCard extends Component {
     };
   }
 
+  toggle(id) {
+      this.props.toggleInCart(id);
+  }
+
   toggleEditable() {
     this.setState({ editable: !this.state.editable });
   }
@@ -34,9 +38,10 @@ class ItemCard extends Component {
         <h3 className="editable-aisle">Aisle: {aisle}</h3>
         <h4 className="note">Your Note: {note}</h4>
         <h5 className="quantity">Quantity: {quantity}</h5>
+        {this.props.inCart}
         <button className="edit-button" onClick={() => { this.toggleEditable() }}>Edit Item</button>
         <button className="delete-button" onClick={() => { deleteItem(id) }}>Delete Item</button>
-        {inCart ? <button>Remove from Cart</button> : <button>Put in Cart</button>}
+        { inCart? <button onClick={ () => { this.toggle(id) }}>Remove from Cart</button> : <button onClick={ () => { this.toggle(id) }}>Put in Cart</button>}
       </div>)
     }
 
