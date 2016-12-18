@@ -4,7 +4,10 @@ class PantryItemCard extends Component {
 
 
   add(name, aisle, quantity, note) {
-    this.props.addItem(name, aisle, quantity, note);
+    const warning = confirm(`Add ${name} to your list?`);
+    if (warning) {
+      this.props.addItem(name, aisle, quantity, note);
+    }
   }
 
   render() {
