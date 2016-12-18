@@ -19,7 +19,7 @@ class Input extends Component {
 
   assignAisle = (category) => {
     if (category === 'Produce' || category === 'Meat' || category === 'Deli/Prepared Foods' || category === 'Checkout' || category === 'Bakery' || category === 'Pest Control(Front of Store)' || category === 'Dairy and Orange Juice'){
-      document.getElementById('aisle-input').value = category;
+      document.getElementById('note-input').value = category;
     } else {
       document.getElementById('aisle-input').value = aisles[category];
     }
