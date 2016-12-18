@@ -8194,13 +8194,13 @@
 	
 	var _Application2 = _interopRequireDefault(_Application);
 	
-	var _items = __webpack_require__(519);
+	var _items = __webpack_require__(520);
 	
 	var _items2 = _interopRequireDefault(_items);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(521);
+	__webpack_require__(522);
 	
 	var enhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 	
@@ -31352,7 +31352,7 @@
 	
 	    _this.assignAisle = function (category) {
 	      if (category === 'Produce' || category === 'Meat' || category === 'Deli/Prepared Foods' || category === 'Checkout' || category === 'Bakery' || category === 'Pest Control(Front of Store)' || category === 'Dairy and Orange Juice') {
-	        document.getElementById('aisle-input').value = category;
+	        document.getElementById('note-input').value = category;
 	      } else {
 	        document.getElementById('aisle-input').value = _Aisles2.default[category];
 	      }
@@ -32155,31 +32155,35 @@
 	          ),
 	          this.props.inCart,
 	          _react2.default.createElement(
-	            'button',
-	            { className: 'edit-button', onClick: function onClick() {
-	                _this2.toggleEditable();
-	              } },
-	            'Edit Item'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { className: 'delete-button', onClick: function onClick() {
-	                deleteItem(id);
-	              } },
-	            'Delete Item'
-	          ),
-	          inCart ? _react2.default.createElement(
-	            'button',
-	            { id: 'in-cart-button', onClick: function onClick() {
-	                _this2.toggle(id);
-	              } },
-	            'Remove from Cart'
-	          ) : _react2.default.createElement(
-	            'button',
-	            { id: 'in-cart-button', onClick: function onClick() {
-	                _this2.toggle(id);
-	              } },
-	            'Put in Cart'
+	            'div',
+	            { className: 'item-card-buttons-container' },
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'edit-button', onClick: function onClick() {
+	                  _this2.toggleEditable();
+	                } },
+	              'Edit Item'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'delete-button', onClick: function onClick() {
+	                  deleteItem(id);
+	                } },
+	              'Delete Item'
+	            ),
+	            inCart ? _react2.default.createElement(
+	              'button',
+	              { id: 'in-cart-button', onClick: function onClick() {
+	                  _this2.toggle(id);
+	                } },
+	              'Remove from Cart'
+	            ) : _react2.default.createElement(
+	              'button',
+	              { id: 'in-cart-button', onClick: function onClick() {
+	                  _this2.toggle(id);
+	                } },
+	              'Put in Cart'
+	            )
 	          )
 	        );
 	      }
@@ -32207,6 +32211,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(299);
@@ -32217,9 +32223,9 @@
 	
 	var _pantryItems2 = _interopRequireDefault(_pantryItems);
 	
-	var _PantryItemCard = __webpack_require__(518);
+	var _PantryItemCardContainer = __webpack_require__(518);
 	
-	var _PantryItemCard2 = _interopRequireDefault(_PantryItemCard);
+	var _PantryItemCardContainer2 = _interopRequireDefault(_PantryItemCardContainer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32242,12 +32248,25 @@
 	    key: 'render',
 	    value: function render() {
 	
-	      var pantryStuff = void 0;
+	      var pantryDisplay = void 0;
+	
+	      if (_pantryItems2.default) {
+	        pantryDisplay = _pantryItems2.default.map(function (item) {
+	          return _react2.default.createElement(_PantryItemCardContainer2.default, _extends({}, item, {
+	            key: item.id
+	          }));
+	        });
+	      }
 	
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        pantryStuff
+	        { className: 'pantry-container' },
+	        _react2.default.createElement(
+	          'h2',
+	          { className: 'pantry-headline' },
+	          'Pantry'
+	        ),
+	        pantryDisplay
 	      );
 	    }
 	  }]);
@@ -32270,42 +32289,110 @@
 	  name: 'olives',
 	  aisle: 2,
 	  quantity: '',
-	  note: ''
+	  note: '',
+	  id: 1
 	}, {
 	  name: 'olive oil',
 	  aisle: 5,
 	  quantity: '',
-	  note: ''
+	  note: '',
+	  id: 2
 	}, {
 	  name: 'pasta',
 	  aisle: 6,
 	  quantity: '',
-	  note: ''
+	  note: '',
+	  id: 3
 	}, {
 	  name: 'pasta sauce',
 	  aisle: 6,
 	  quantity: '',
-	  note: ''
+	  note: '',
+	  id: 4
 	}, {
-	  name: '',
-	  aisle: '',
+	  name: 'rice',
+	  aisle: 6,
 	  quantity: '',
-	  note: ''
+	  note: '',
+	  id: 5
 	}, {
-	  name: '',
-	  aisle: '',
+	  name: 'soups',
+	  aisle: 7,
 	  quantity: '',
-	  note: ''
+	  note: '',
+	  id: 6
 	}, {
-	  name: '',
-	  aisle: '',
+	  name: 'frozen onions',
+	  aisle: 12,
 	  quantity: '',
-	  note: ''
+	  note: '',
+	  id: 7
 	}, {
-	  name: '',
-	  aisle: '',
+	  name: 'bread',
+	  aisle: 13,
 	  quantity: '',
-	  note: ''
+	  note: '',
+	  id: 8
+	}, {
+	  name: 'bagels',
+	  aisle: 13,
+	  id: 9
+	}, {
+	  name: 'bottled water',
+	  aisle: 20,
+	  id: 10
+	}, {
+	  name: 'soda',
+	  aisle: 22,
+	  id: 11
+	}, {
+	  name: 'ice cream/magnums',
+	  aisle: 11,
+	  id: 12
+	}, {
+	  name: 'frozen dinners',
+	  aisle: 11,
+	  id: 13
+	}, {
+	  name: 'frozen lunches',
+	  aisle: 11,
+	  id: 14
+	}, {
+	  name: 'egg rolls',
+	  aisle: 11,
+	  id: 15
+	}, {
+	  name: 'deodorant',
+	  aisle: 17,
+	  id: 16
+	}, {
+	  name: 'body wash',
+	  aisle: 17,
+	  id: 17
+	}, {
+	  name: 'shampoo',
+	  aisle: 17,
+	  id: 18
+	}, {
+	  name: 'conditioner',
+	  aisle: 17,
+	  id: 19
+	}, {
+	  name: 'toothpaste',
+	  aisle: 17,
+	  id: 20
+	}, {
+	  name: 'tooth floss',
+	  aisle: 17,
+	  id: 21
+	}, {
+	  name: 'mouthwash',
+	  aisle: 17,
+	  id: 22
+	}, {
+	  name: 'chips',
+	  aisle: 19,
+	  id: 23
 	}];
 	
 	exports.default = pantry;
@@ -32315,6 +32402,46 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(496);
+	
+	var _PantryItemCard = __webpack_require__(519);
+	
+	var _PantryItemCard2 = _interopRequireDefault(_PantryItemCard);
+	
+	var _index = __webpack_require__(511);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    state: state
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    addItem: function addItem(name, aisle, quantity, note) {
+	      dispatch((0, _index.addItem)(name, aisle, quantity, note));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_PantryItemCard2.default);
+
+/***/ },
+/* 519 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -32344,12 +32471,35 @@
 	  }
 	
 	  _createClass(PantryItemCard, [{
-	    key: 'render',
+	    key: "add",
+	    value: function add(name, aisle, quantity, note) {
+	      var warning = confirm("Add " + name + " to your list?");
+	      if (warning) {
+	        this.props.addItem(name, aisle, quantity, note);
+	      }
+	    }
+	  }, {
+	    key: "render",
 	    value: function render() {
+	      var _this2 = this;
+	
+	      var _props = this.props,
+	          name = _props.name,
+	          aisle = _props.aisle,
+	          quantity = _props.quantity,
+	          note = _props.note;
+	
+	
 	      return _react2.default.createElement(
-	        'div',
+	        "div",
 	        null,
-	        'I am the pantry item card.'
+	        _react2.default.createElement(
+	          "h2",
+	          { className: "pantry-item-name", onClick: function onClick() {
+	              _this2.add(name, aisle, quantity, note);
+	            } },
+	          name
+	        )
 	      );
 	    }
 	  }]);
@@ -32360,7 +32510,7 @@
 	exports.default = PantryItemCard;
 
 /***/ },
-/* 519 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32369,7 +32519,7 @@
 	  value: true
 	});
 	
-	var _lodash = __webpack_require__(520);
+	var _lodash = __webpack_require__(521);
 	
 	var items = function items() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -32456,7 +32606,7 @@
 	exports.default = items;
 
 /***/ },
-/* 520 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -49528,16 +49678,16 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(489)(module)))
 
 /***/ },
-/* 521 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(522);
+	var content = __webpack_require__(523);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(524)(content, {});
+	var update = __webpack_require__(525)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -49554,21 +49704,21 @@
 	}
 
 /***/ },
-/* 522 */
+/* 523 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(523)();
+	exports = module.exports = __webpack_require__(524)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, "@media screen and (max-width: 800px) {\n  input, select {\n    display: block;\n    margin: 10px auto;\n    width: 200px; } }\n\nhtml {\n  background: linear-gradient(to bottom, #8694f7, #fcfdfe);\n  font-family: \"Open Sans\", sans-serif;\n  height: 2000px;\n  text-align: center; }\n\nh1 {\n  font-size: 40px;\n  text-align: center; }\n\n#input-items-container {\n  text-align: center; }\n\ninput {\n  border: 1px solid black; }\n  input:hover {\n    border: 1px solid magenta; }\n\n.logged-in-as {\n  font-size: 20px;\n  margin: 20px auto; }\n\n.login-name {\n  font-style: italic; }\n\n#submit-button, .sign-in-button, .save-edits-button {\n  background-color: #a0ecaf; }\n  #submit-button:hover, .sign-in-button:hover, .save-edits-button:hover {\n    background-color: #2acbfe;\n    cursor: pointer; }\n\n#sort-items-button, #top-of-page-button, #sort-alpha-button {\n  background-color: #cff4f5; }\n  #sort-items-button:hover, #top-of-page-button:hover, #sort-alpha-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n.edit-button, #in-cart-button, .exit-edit-button {\n  background-color: #cff4f5; }\n  .edit-button:hover, #in-cart-button:hover, .exit-edit-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n#item-status-message {\n  font-size: 24px;\n  font-style: italic;\n  margin: 30px auto;\n  text-align: center; }\n\n#items-master-container {\n  border: 1px solid black;\n  margin: 50px auto;\n  min-height: 400px;\n  padding: 0 10px; }\n  #items-master-container li {\n    list-style-type: none; }\n\n.each-idea-container {\n  background-color: white;\n  border: 1px solid black;\n  margin: 20px auto;\n  padding: 10px;\n  text-align: center; }\n\n.each-idea-container h2 {\n  font-weight: bold; }\n\n.each-idea-container h4 {\n  font-style: italic; }\n\n.delete-button, #delete-all-items-button, .sign-out-button {\n  background-color: #db655d; }\n  .delete-button:hover, #delete-all-items-button:hover, .sign-out-button:hover {\n    background-color: #ee4914;\n    cursor: pointer; }\n\n.is-in-cart {\n  background-color: #c2bdb2;\n  color: #8c8c8c;\n  text-decoration: line-through; }\n", ""]);
+	exports.push([module.id, "@media screen and (max-width: 800px) {\n  input, select {\n    display: block;\n    margin: 10px auto;\n    width: 200px; } }\n\nhtml {\n  background: linear-gradient(to bottom, #8694f7, #fcfdfe);\n  font-family: \"Open Sans\", sans-serif;\n  height: 2000px;\n  text-align: center; }\n\nh1 {\n  font-size: 40px;\n  text-align: center; }\n\n#input-items-container {\n  text-align: center; }\n\ninput {\n  border: 1px solid black; }\n  input:hover {\n    border: 1px solid magenta; }\n\n.logged-in-as {\n  font-size: 20px;\n  margin: 20px auto; }\n\n.login-name {\n  font-style: italic; }\n\n.item-card-buttons-container {\n  margin: 20px auto; }\n\n#submit-button, .sign-in-button, .save-edits-button {\n  background-color: #a0ecaf; }\n  #submit-button:hover, .sign-in-button:hover, .save-edits-button:hover {\n    background-color: #2acbfe;\n    cursor: pointer; }\n\n#sort-items-button, #top-of-page-button, #sort-alpha-button {\n  background-color: #cff4f5; }\n  #sort-items-button:hover, #top-of-page-button:hover, #sort-alpha-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n.edit-button, #in-cart-button, .exit-edit-button {\n  background-color: #cff4f5; }\n  .edit-button:hover, #in-cart-button:hover, .exit-edit-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n#top-of-page-button {\n  margin: 30px auto; }\n\n#item-status-message {\n  font-size: 24px;\n  font-style: italic;\n  margin: 30px auto;\n  text-align: center; }\n\n#items-master-container {\n  border: 1px solid black;\n  margin: 50px auto;\n  min-height: 400px;\n  padding: 0 10px; }\n  #items-master-container li {\n    list-style-type: none; }\n\n.each-idea-container {\n  background-color: white;\n  border: 1px solid black;\n  margin: 20px auto;\n  padding: 10px;\n  text-align: center; }\n\n.each-idea-container h2 {\n  font-weight: bold; }\n\n.each-idea-container h4 {\n  font-style: italic; }\n\n.delete-button, #delete-all-items-button, .sign-out-button {\n  background-color: #db655d; }\n  .delete-button:hover, #delete-all-items-button:hover, .sign-out-button:hover {\n    background-color: #ee4914;\n    cursor: pointer; }\n\n.is-in-cart {\n  background-color: #c2bdb2;\n  color: #8c8c8c;\n  text-decoration: line-through; }\n\n.pantry-container {\n  background-color: white;\n  border: 1px solid black;\n  margin: 0 auto;\n  width: 80vw; }\n  .pantry-container .pantry-headline {\n    font-size: 36px;\n    margin: 50px auto; }\n  .pantry-container .pantry-item-name {\n    color: #4025e2; }\n    .pantry-container .pantry-item-name:hover {\n      color: red;\n      font-style: italic;\n      cursor: pointer; }\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 523 */
+/* 524 */
 /***/ function(module, exports) {
 
 	/*
@@ -49624,7 +49774,7 @@
 
 
 /***/ },
-/* 524 */
+/* 525 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
