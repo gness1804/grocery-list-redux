@@ -31300,6 +31300,9 @@
 	    },
 	    retrieveStoredItems: function retrieveStoredItems(items) {
 	      dispatch((0, _index.retrieveStoredItems)(items));
+	    },
+	    deleteInCart: function deleteInCart() {
+	      dispatch((0, _index.deleteInCart)());
 	    }
 	  };
 	};
@@ -31405,7 +31408,8 @@
 	      var _props = this.props,
 	          deleteAllItems = _props.deleteAllItems,
 	          sortAisle = _props.sortAisle,
-	          sortAlpha = _props.sortAlpha;
+	          sortAlpha = _props.sortAlpha,
+	          deleteInCart = _props.deleteInCart;
 	      var submitDisabled = this.state.submitDisabled;
 	
 	
@@ -31457,6 +31461,13 @@
 	              deleteAllItems();
 	            } },
 	          'Delete ALL Items!'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { id: 'delete-all-items-in-cart-button', type: 'button', onClick: function onClick() {
+	              deleteInCart();
+	            } },
+	          'Delete All Items In Cart'
 	        )
 	      );
 	    }
@@ -31840,6 +31851,12 @@
 	  return {
 	    type: 'TOGGLE_IN_CART',
 	    id: id
+	  };
+	};
+	
+	var deleteInCart = exports.deleteInCart = function deleteInCart() {
+	  return {
+	    type: 'DELETE_IN_CART'
 	  };
 	};
 
@@ -32540,9 +32557,19 @@
 	          return i.id !== action.id;
 	        });
 	      }
-	    case 'DELETE_ALL_ITEMS':
-	      var warning2 = confirm('This will delete ALL items! Are you sure?');
+	    case 'DELETE_IN_CART':
+	      var warning2 = confirm('Are you sure you want to delete all items in your cart?');
 	      if (warning2) {
+	        localStorage.setItem('items', JSON.stringify(state.filter(function (i) {
+	          return i.inCart === false;
+	        })));
+	        return state.filter(function (i) {
+	          return i.inCart === false;
+	        });
+	      }
+	    case 'DELETE_ALL_ITEMS':
+	      var warning3 = confirm('This will delete ALL items! Are you sure?');
+	      if (warning3) {
 	        localStorage.setItem('items', JSON.stringify([]));
 	        return [];
 	      }
@@ -49712,7 +49739,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@media screen and (max-width: 800px) {\n  input, select {\n    display: block;\n    margin: 10px auto;\n    width: 200px; } }\n\nhtml {\n  background: linear-gradient(to bottom, #8694f7, #fcfdfe);\n  font-family: \"Open Sans\", sans-serif;\n  height: 2000px;\n  text-align: center; }\n\nh1 {\n  font-size: 40px;\n  text-align: center; }\n\n#input-items-container {\n  text-align: center; }\n\ninput {\n  border: 1px solid black; }\n  input:hover {\n    border: 1px solid magenta; }\n\n.logged-in-as {\n  font-size: 20px;\n  margin: 20px auto; }\n\n.login-name {\n  font-style: italic; }\n\n.item-card-buttons-container {\n  margin: 20px auto; }\n\n#submit-button, .sign-in-button, .save-edits-button {\n  background-color: #a0ecaf; }\n  #submit-button:hover, .sign-in-button:hover, .save-edits-button:hover {\n    background-color: #2acbfe;\n    cursor: pointer; }\n\n#sort-items-button, #top-of-page-button, #sort-alpha-button {\n  background-color: #cff4f5; }\n  #sort-items-button:hover, #top-of-page-button:hover, #sort-alpha-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n.edit-button, #in-cart-button, .exit-edit-button {\n  background-color: #cff4f5; }\n  .edit-button:hover, #in-cart-button:hover, .exit-edit-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n#top-of-page-button {\n  margin: 30px auto; }\n\n#item-status-message {\n  font-size: 24px;\n  font-style: italic;\n  margin: 30px auto;\n  text-align: center; }\n\n#items-master-container {\n  border: 1px solid black;\n  margin: 50px auto;\n  min-height: 400px;\n  padding: 0 10px; }\n  #items-master-container li {\n    list-style-type: none; }\n\n.each-idea-container {\n  background-color: white;\n  border: 1px solid black;\n  margin: 20px auto;\n  padding: 10px;\n  text-align: center; }\n\n.each-idea-container h2 {\n  font-weight: bold; }\n\n.each-idea-container h4 {\n  font-style: italic; }\n\n.delete-button, #delete-all-items-button, .sign-out-button {\n  background-color: #db655d; }\n  .delete-button:hover, #delete-all-items-button:hover, .sign-out-button:hover {\n    background-color: #ee4914;\n    cursor: pointer; }\n\n.is-in-cart {\n  background-color: #c2bdb2;\n  color: #8c8c8c;\n  text-decoration: line-through; }\n\n.pantry-container {\n  background-color: white;\n  border: 1px solid black;\n  margin: 0 auto;\n  width: 80vw; }\n  .pantry-container .pantry-headline {\n    font-size: 36px;\n    margin: 50px auto; }\n  .pantry-container .pantry-item-name {\n    color: #4025e2; }\n    .pantry-container .pantry-item-name:hover {\n      color: red;\n      font-style: italic;\n      cursor: pointer; }\n", ""]);
+	exports.push([module.id, "@media screen and (max-width: 800px) {\n  input, select {\n    display: block;\n    margin: 10px auto;\n    width: 200px; } }\n\nhtml {\n  background: linear-gradient(to bottom, #8694f7, #fcfdfe);\n  font-family: \"Open Sans\", sans-serif;\n  height: 2000px;\n  text-align: center; }\n\nh1 {\n  font-size: 40px;\n  text-align: center; }\n\n#input-items-container {\n  text-align: center; }\n\ninput {\n  border: 1px solid black; }\n  input:hover {\n    border: 1px solid magenta; }\n\n.logged-in-as {\n  font-size: 20px;\n  margin: 20px auto; }\n\n.login-name {\n  font-style: italic; }\n\n.item-card-buttons-container {\n  margin: 20px auto; }\n\n#submit-button, .sign-in-button, .save-edits-button {\n  background-color: #a0ecaf; }\n  #submit-button:hover, .sign-in-button:hover, .save-edits-button:hover {\n    background-color: #2acbfe;\n    cursor: pointer; }\n\n#sort-items-button, #top-of-page-button, #sort-alpha-button {\n  background-color: #cff4f5; }\n  #sort-items-button:hover, #top-of-page-button:hover, #sort-alpha-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n.edit-button, #in-cart-button, .exit-edit-button {\n  background-color: #cff4f5; }\n  .edit-button:hover, #in-cart-button:hover, .exit-edit-button:hover {\n    background-color: #8edfdf;\n    cursor: pointer; }\n\n#top-of-page-button {\n  margin: 30px auto; }\n\n#item-status-message {\n  font-size: 24px;\n  font-style: italic;\n  margin: 30px auto;\n  text-align: center; }\n\n#items-master-container {\n  border: 1px solid black;\n  margin: 50px auto;\n  min-height: 400px;\n  padding: 0 10px; }\n  #items-master-container li {\n    list-style-type: none; }\n\n.each-idea-container {\n  background-color: white;\n  border: 1px solid black;\n  margin: 20px auto;\n  padding: 10px;\n  text-align: center; }\n\n.each-idea-container h2 {\n  font-weight: bold; }\n\n.each-idea-container h4 {\n  font-style: italic; }\n\n.delete-button, #delete-all-items-button, .sign-out-button, #delete-all-items-in-cart-button {\n  background-color: #db655d; }\n  .delete-button:hover, #delete-all-items-button:hover, .sign-out-button:hover, #delete-all-items-in-cart-button:hover {\n    background-color: #ee4914;\n    cursor: pointer; }\n\n.is-in-cart {\n  background-color: #c2bdb2;\n  color: #8c8c8c;\n  text-decoration: line-through; }\n\n.pantry-container {\n  background-color: white;\n  border: 1px solid black;\n  margin: 0 auto;\n  width: 80vw; }\n  .pantry-container .pantry-headline {\n    font-size: 36px;\n    margin: 50px auto; }\n  .pantry-container .pantry-item-name {\n    color: #4025e2; }\n    .pantry-container .pantry-item-name:hover {\n      color: red;\n      font-style: italic;\n      cursor: pointer; }\n", ""]);
 	
 	// exports
 
