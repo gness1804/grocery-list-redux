@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Input from '../components/Input';
 
-import { addItem, deleteAllItems, sortAisle, sortAlpha, retrieveStoredItems } from '../actions/index';
+import { addItem, deleteAllItems, sortAisle, sortAlpha, retrieveStoredItems, deleteInCart } from '../actions/index';
 
 const mapStateToProps = (state) => ({
   state,
@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
      },
      retrieveStoredItems: (items) => {
        dispatch(retrieveStoredItems(items));
+     },
+     deleteInCart: () => {
+       dispatch(deleteInCart());
      },
   };
 };

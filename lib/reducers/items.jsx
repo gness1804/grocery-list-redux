@@ -12,9 +12,15 @@ const items = (state = [], action) => {
         localStorage.setItem('items', JSON.stringify(state.filter((i) => { return i.id !== action.id })));
         return state.filter((i) => { return i.id !== action.id });
       }
-    case 'DELETE_ALL_ITEMS':
-      const warning2 = confirm('This will delete ALL items! Are you sure?');
+    case 'DELETE_IN_CART':
+      const warning2 = confirm('Are you sure you want to delete all items in your cart?');
       if (warning2) {
+        localStorage.setItem('items', JSON.stringify(state.filter((i) => { return i.inCart === false })));
+        return (state.filter((i) => { return i.inCart === false }));
+      }
+    case 'DELETE_ALL_ITEMS':
+      const warning3 = confirm('This will delete ALL items! Are you sure?');
+      if (warning3) {
         localStorage.setItem('items', JSON.stringify([]));
         return [];
       }

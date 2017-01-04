@@ -52,7 +52,7 @@ class Input extends Component {
 
   render() {
 
-    const { deleteAllItems, sortAisle, sortAlpha } = this.props;
+    const { deleteAllItems, sortAisle, sortAlpha, deleteInCart } = this.props;
     const { submitDisabled } = this.state;
 
     return (
@@ -67,6 +67,7 @@ class Input extends Component {
         <button onClick={() => { sortAisle() }} id="sort-items-button" type="button">Sort by Aisle</button>
         <button onClick={() => { sortAlpha() }} id="sort-alpha-button" type="button">Sort Alpha</button>
         <button id="delete-all-items-button" type="button" onClick={() => { deleteAllItems() }}>Delete ALL Items!</button>
+        <button id="delete-all-items-in-cart-button" type="button" onClick={() => { deleteInCart() } }>Delete All Items In Cart</button>
       </div>
     );
   }
