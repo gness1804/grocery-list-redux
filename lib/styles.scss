@@ -108,7 +108,7 @@ input {
   font-style: italic;
 }
 
-.delete-button, #delete-all-items-button, .sign-out-button {
+.delete-button, #delete-all-items-button, .sign-out-button, #delete-all-items-in-cart-button {
   @include red-buttons;
 
   &:hover {
